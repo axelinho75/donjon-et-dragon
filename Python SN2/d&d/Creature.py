@@ -18,17 +18,24 @@ class creature :
     def attaque(self, cible, lancer_de):
         print(f"\n{self.name} attaque {cible.name} !")
         time.sleep(2)
-        jet= lancer_de(20)
-        print(f"{self.name} a lance D20 : {jet} (CA cible : {cible.defense})")
-        time.sleep(1)
+        jet = lancer_de(20)
+        print(f"{self.name} a lancé D20 : {jet} (CA cible : {cible.defense})")
         if jet >= cible.defense:
             degats = lancer_de(self.degatsmax)
+            print(f"Attaque réussie ! {self.name} inflige {degats} points de dégâts à {cible.name}.")
             cible.pv -= degats
-            print(f"{self.name} touche {cible.name} et lui infigue {degats} points de degats !")
-            time.sleep(1)
-        else: 
-            print(f"{self.name} rate son attaque !")
-            time.sleep(1)
+        else:
+            print(f"{self.name} a raté son attaque.")
+            
+    def ajouter_etat(self, etat):
+        if etat not in self.etat:
+            self.etat.append(etat)
+            print(f"{self.name} est maintenant {etat}.")
+
+    def retirer_etat(self, etat):
+        if etat in self.etat:
+            self.etat.remove(etat)
+            print(f"{self.name} n'est plus {etat}.")
             
     def afficher_status(self):
         print(f"{self.name} - PV = {self.pv} / - Etats : {self.etat if self.etat else 'Aucun'} ")
